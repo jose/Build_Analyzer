@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Vector;
 
 import org.apache.tools.ant.Project;
@@ -7,13 +8,14 @@ import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.Target;
 
 import target.finders.TargetGetter;
+import util.TestGetter;
 
 
 public class Analyzer {
+	
 	private Project project;
-	private Target compileTarget, testCompileTarget;
-	private Vector sortedTargets;
 	private TargetGetter targetGetter;
+	private TestGetter testGetter;
 	
 	public Analyzer(File buildFile) {
 		
@@ -23,23 +25,14 @@ public class Analyzer {
 		ProjectHelper helper = new ProjectHelper();
 		helper.configureProject(project, buildFile);
 		
-		//Invoke Target getter
-		targetGetter = new TargetGetter(project.topoSort("", project.getTargets()));
+		//Initialize Target getter
+		if(project.getDefaultTarget() != null)
+			targetGetter = new TargetGetter(project.topoSort(project.getDefaultTarget(), project.getTargets()));
+		else
+			targetGetter = new TargetGetter(project.topoSort("", project.getTargets()));
 		
-//		if(project.getDefaultTarget() != null)
-//			sortedTargets = project.topoSort(project.getDefaultTarget(), project.getTargets());
-//		else
-//			sortedTargets = project.topoSort("", project.getTargets());
-//		
-//		
-//			
-//		//Print out all targets in execution order
-//		Enumeration vEnum = sortedTargets.elements();
-//
-//	    while(vEnum.hasMoreElements())
-//	    		System.out.println(vEnum.nextElement() + "\n");
-		
-		
+		//Initialize Test getter
+		testGetter = new TestGetter(targetGetter.getJunitTarget());
 	}
 	
 	public Target getCompileTarget() {
@@ -47,11 +40,20 @@ public class Analyzer {
 	}
 	
 	public Target getCompileTestTarget() {
-		System.out.println(targetGetter.getCompileTestTarget().toString());
 		return targetGetter.getCompileTestTarget();
 	}
 	
+	public String getIncludes() {
+		return testGetter.getIncludesPattern();
+	}
 	
+	public String getExcludes() {
+		return testGetter.getExcludesPattern();
+	}
+	
+	public List<String> getTests() {
+		return null;
+	}
 	
 	
 	

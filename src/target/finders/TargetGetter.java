@@ -39,13 +39,12 @@ public class TargetGetter {
 				if(t.getName().contains("compile")) {
 					if(t.getName().equals("compile") || t.getName().contains("all"))
 						return t;
+					else
+						return potentialSrcTargets.get(potentialSrcTargets.size()-1);
 				}
 			}
 		}
-		else {
-			return potentialSrcTargets.get(0);
-		}
-		return potentialSrcTargets.get(potentialSrcTargets.size()-1);
+		return potentialSrcTargets.get(0);
 	}
 	
 	/**
@@ -59,10 +58,30 @@ public class TargetGetter {
 				return target;
 			}
 		}
-		else if(potentialTestTargets.size()>0)
-			return potentialTestTargets.get(potentialTestTargets.size()-1);
-		
-		return null;
+		return potentialTestTargets.get(potentialTestTargets.size()-1);
+	}
+	
+	/**
+	 * get target that contains junit test (suppose to be the target that executes all developer-written tests)
+	 * @return
+	 */
+	public Target getJunitTarget() {
+		List<Target> junitTargets = this.getTargets("junit");
+		if(junitTargets.size() == 1)
+			return junitTargets.get(0);
+		else if(junitTargets.size() == 0) {
+			Debugger.log("There are no target that contains junit.");
+			return null;
+		}
+		else {
+			Debugger.log("There are more than one targets that contains junit.");
+			for(Target target:junitTargets) {
+				if(target.getName().contains("all"))
+					return target;
+			}
+			//if cannot infer which junit target executes all test, get the one that executes first.
+			return junitTargets.get(0);
+		}
 	}
 	
 	

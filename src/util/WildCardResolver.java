@@ -24,6 +24,5 @@ public class WildCardResolver {
 					+ "Instead, a list of wildcards that matches test file pattern is written to build.properties.");
 		}
 		return ds.getIncludedFiles();
-	
 	}
 }
