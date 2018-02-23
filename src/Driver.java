@@ -40,6 +40,8 @@ public class Driver {
 				buildFile = new File(Paths.get(pathToProject) + Paths.get("/").toString() + scanner.nextLine());
 			}
 			System.out.println("Build file: "+buildFile);
+			Analyzer analyzer = new Analyzer(buildFile);
+			analyzer.getCompileTestTarget();
 		}
 		
 	}
