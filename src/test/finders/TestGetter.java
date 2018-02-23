@@ -1,4 +1,4 @@
-package util;
+package test.finders;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.tools.ant.RuntimeConfigurable;
 import org.apache.tools.ant.Target;
 import org.apache.tools.ant.Task;
+
+import util.TaskHelper;
 
 public class TestGetter {
 	
@@ -37,9 +39,8 @@ public class TestGetter {
 		return ret;
 	}
 	
-	public void getPatterns() {
+	private void getPatterns() {
 		List<Task> tasks = TaskHelper.getTasks("junit", target);
-		String ret = "";
 		for(Task task:tasks) {
 			Enumeration<RuntimeConfigurable> junitSubTasks = task.getRuntimeConfigurableWrapper().getChildren();
 			this.getSubTask("batchtest", junitSubTasks, batchTests);

@@ -8,7 +8,7 @@ import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.Target;
 
 import target.finders.TargetGetter;
-import util.TestGetter;
+import test.finders.TestGetter;
 
 
 public class Analyzer {
