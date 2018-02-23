@@ -1,14 +1,17 @@
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import util.FileWriter;
 import util.WildCardResolver;
 
 public class Driver {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException, FileNotFoundException, IOException {
 		String pathToProject = "";
 		String pathToOutput = "";
 		File dir, buildFile;
@@ -39,11 +42,12 @@ public class Driver {
 				int index = pathToProject.lastIndexOf(Paths.get("/").toString());
 				buildFile = new File(Paths.get(pathToProject) + Paths.get("/").toString() + scanner.nextLine());
 			}
-			System.out.println("Build file: "+buildFile);
+//			System.out.println("Build file: "+buildFile);
 			Analyzer analyzer = new Analyzer(buildFile);
-//			System.out.println(analyzer.getCompileTestTarget());
-			System.out.println("includes: "+analyzer.getIncludes());
-			System.out.println("excludes: "+analyzer.getExcludes());
+//			System.out.println("includes: "+analyzer.getIncludes());
+//			System.out.println("excludes: "+analyzer.getExcludes());
+			FileWriter.write(pathToOutput+"/includes.txt", analyzer.getIncludes());
+			FileWriter.write(pathToOutput+"/excludes.txt", analyzer.getExcludes());
 		}
 		
 	}
