@@ -44,10 +44,10 @@ public class Driver {
 			}
 //			System.out.println("Build file: "+buildFile);
 			Analyzer analyzer = new Analyzer(buildFile);
-//			System.out.println("includes: "+analyzer.getIncludes());
-//			System.out.println("excludes: "+analyzer.getExcludes());
-			FileWriter.write(pathToOutput+"/includes.txt", analyzer.getIncludes());
-			FileWriter.write(pathToOutput+"/excludes.txt", analyzer.getExcludes());
+			System.out.println(analyzer.getTests());
+			FileWriter.write(pathToOutput+Paths.get("/")+"includes.txt", analyzer.getIncludes());
+			FileWriter.write(pathToOutput+Paths.get("/")+"excludes.txt", analyzer.getExcludes());
+			FileWriter.write(pathToOutput+Paths.get("/")+"developer-included-tests.txt", analyzer.getTests());
 		}
 		
 	}

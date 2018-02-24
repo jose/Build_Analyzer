@@ -1,4 +1,4 @@
-package target.finders;
+package targetgetter;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -76,6 +76,8 @@ public class TargetGetter {
 		else {
 			Debugger.log("There are more than one targets that contains junit.");
 			for(Target target:junitTargets) {
+				if(target.getName().equals("test"))
+					return target;
 				if(target.getName().contains("all"))
 					return target;
 			}

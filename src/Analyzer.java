@@ -1,14 +1,15 @@
 import java.io.File;
-import java.util.Enumeration;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.Target;
 
-import target.finders.TargetGetter;
-import test.finders.TestGetter;
+import targetgetter.TargetGetter;
+import testgetter.TestGetter;
+import util.PathParser;
+import util.WildCardResolver;
 
 
 public class Analyzer {
@@ -16,6 +17,7 @@ public class Analyzer {
 	private Project project;
 	private TargetGetter targetGetter;
 	private TestGetter testGetter;
+	private PathParser pathParser;
 	
 	public Analyzer(File buildFile) {
 		
@@ -33,6 +35,9 @@ public class Analyzer {
 		
 		//Initialize Test getter
 		testGetter = new TestGetter(targetGetter.getJunitTarget());
+		
+		//Initialize Path parser
+		pathParser = new PathParser(project);
 	}
 	
 	public Target getCompileTarget() {
@@ -51,10 +56,20 @@ public class Analyzer {
 		return testGetter.getExcludesPattern();
 	}
 	
-	public List<String> getTests() {
-		return null;
+	public String getTests() {
+		String tests = "";
+		String dir = testGetter.getTestDir();
+		System.out.println("parsed dir: "+pathParser.parse(dir));
+		String str[] = WildCardResolver.resolveWildCard(this.getIncludes().split("\n"), this.getExcludes().split("\n"), this.project.getBaseDir().toString()+Paths.get("/")+this.pathParser.parse(dir));
+		for(int i = 0; i<str.length; i++) {
+			tests = tests + str[i] + '\n';
+		}
+		return tests;
 	}
 	
+	public Target getJunitTarget() {
+		return targetGetter.getJunitTarget();
+	}
 	
 	
 }
