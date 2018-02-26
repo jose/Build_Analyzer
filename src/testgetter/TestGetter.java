@@ -22,8 +22,6 @@ public class TestGetter {
 		includes = new ArrayList<RuntimeConfigurable>();
 		excludes = new ArrayList<RuntimeConfigurable>();
 		this.getPatterns();
-//		System.out.println("includes: "+includes.size());
-//		System.out.println("excludes: "+excludes.size());
 	}
 	
 	public String getIncludesPattern() {
@@ -38,11 +36,12 @@ public class TestGetter {
 		
 		if(this.includes != null) {
 			for(RuntimeConfigurable include:includes) {
-				if(include.getAttributeMap().get("name") != null)
+				String temp = (String) include.getAttributeMap().get("name");
+				if(include.getAttributeMap().get("name") != null && !temp.contains("$"))
 					ret = ret+include.getAttributeMap().get("name")+"\n";
 			}
 		}
-		System.out.println("includes: "+ret);
+//		System.out.println("includes: "+ret);
 		return ret;
 	}
 	
@@ -58,11 +57,12 @@ public class TestGetter {
 		
 		if(this.excludes != null) {
 			for(RuntimeConfigurable exclude:excludes) {
-				if(exclude.getAttributeMap().get("name") != null)
+				String temp = (String) exclude.getAttributeMap().get("name");
+				if(exclude.getAttributeMap().get("name") != null && !temp.contains("$"))
 					ret = ret+exclude.getAttributeMap().get("name")+"\n";
 			}
 		}
-		System.out.println("excludes: "+ret);
+//		System.out.println("excludes: "+ret);
 		return ret;
 	}
 	
@@ -91,18 +91,19 @@ public class TestGetter {
 	}
 	
 	private void getSubTask(String taskName, Enumeration<RuntimeConfigurable> subTasks, List<RuntimeConfigurable> list) {
-		RuntimeConfigurable temp = null;
+		
+		if(!subTasks.hasMoreElements())
+			return;
+		
 		while(subTasks.hasMoreElements()) {
-			RuntimeConfigurable next = subTasks.nextElement();
-			if(next!=null) {
-				temp = next;
-				if(temp.getElementTag().equalsIgnoreCase(taskName)) {
-					list.add(temp);
-				}
-			}
-		}
-		if(temp != null)
+			RuntimeConfigurable temp = subTasks.nextElement();
+			
+			if(temp.getElementTag().equalsIgnoreCase(taskName)) 
+				list.add(temp);
+			
 			getSubTask(taskName, temp.getChildren(), list);
+		}
+			
 	}
 	
 }

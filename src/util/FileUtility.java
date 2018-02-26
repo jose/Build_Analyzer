@@ -1,21 +1,9 @@
 package util;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Stack;
-import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FileUtility {
-	
-	
-
 	
 	/**
 	 * "absolute" is expected to be the base directory in absolute path
@@ -27,7 +15,6 @@ public class FileUtility {
 	 * A relative path version of "path" in relation to "absolute" 
 	 */
 	public static String absoluteToRelative(String absolute, String path) {
-		
 		
 		/**
 		 * Since MAC don't have Drive likes Windows

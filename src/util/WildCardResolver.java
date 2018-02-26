@@ -25,4 +25,6 @@ public class WildCardResolver {
 		}
 		return ds.getIncludedFiles();
 	}
+	
+//	public static String[] getExcludedFiles
 }

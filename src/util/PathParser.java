@@ -1,9 +1,6 @@
 package util;
 
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.Enumeration;
@@ -22,10 +19,7 @@ public class PathParser {
 	
 	private String path;
 	private Properties properties;
-		
 	private Map<String, String> properties_map;
-
-
 	private Project project;
 	
 	
@@ -41,14 +35,9 @@ public class PathParser {
 		this.project = project;
 		this.loadPropertiesFromTarget();
 		
-		
 	}
 	
-	
-
-	
 	public String parse(String path) {
-		
 		
 		//String result stores the output string
 		String result = "";
@@ -92,7 +81,6 @@ public class PathParser {
 			temp = temp.substring(end+1);
 			index = temp.indexOf('$');
 			end = temp.indexOf('}');
-			
 		}
 		
 		String preprocess_path="";
@@ -111,9 +99,6 @@ public class PathParser {
 		
 		String resolved = null;
 		
-	
-			
-		
 		//Look for property value using project.getProperty
 		if(this.project != null) {
 			resolved = this.project.getProperty(key);
@@ -126,11 +111,7 @@ public class PathParser {
 		if(resolved != null)
 			return resolved;
 		
-		
-		
 		return resolved;
-		
-		
 	}
 	
 	/**
@@ -143,7 +124,6 @@ public class PathParser {
 		
 		//Get ALL Target
 		Hashtable target_map = project.getTargets();
-		
 		Enumeration names = target_map.keys();
 		
 		//Get all properties
@@ -183,32 +163,5 @@ public class PathParser {
 		}
 		//Resolve End
 	}
-	
-	
-	/**
-	 * Add property files for parsing
-	 * 
-	 * No longer Necessary
-	 */
-	public void addProperties(String filename) {
-		//Load the property file
-		InputStream file = null;
-		try{
-		
-		file = new FileInputStream(filename);
-		
-		this.properties.load(file);
-		} catch(IOException ex) {
-			//ex.printStackTrace();
-		} finally {
-			if(file != null) {
-				try {
-					file.close();
-				} catch (IOException e) {
-					//e.printStackTrace();
-				}
-			}
-		}
-	}
-	
+
 }

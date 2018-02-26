@@ -16,11 +16,17 @@ public class Driver {
 		String pathToOutput = "";
 		File dir, buildFile;
 		Scanner scanner = new Scanner(System.in);
+		String input[] = new String[2];
+		input = scanner.nextLine().split(" ");
 		
-		System.out.println("Please input a path to the project: ");
-		pathToProject = scanner.nextLine();
-		System.out.println("Please input a path to write the result: ");
-		pathToOutput = scanner.nextLine();
+		pathToProject = input[0];
+		pathToOutput = input[1];
+		
+		
+//		System.out.println("Please input a path to the project: ");
+//		pathToProject = scanner.nextLine();
+//		System.out.println("Please input a path to write the result: ");
+//		pathToOutput = scanner.nextLine();
 		
 		dir = new File(pathToProject);
 		if(!dir.isDirectory()) {
@@ -44,7 +50,8 @@ public class Driver {
 			}
 //			System.out.println("Build file: "+buildFile);
 			Analyzer analyzer = new Analyzer(buildFile);
-			System.out.println(analyzer.getTests());
+//			System.out.println(analyzer.getJunitTarget());
+//			System.out.println(analyzer.getTests());
 			FileWriter.write(pathToOutput+Paths.get("/")+"includes.txt", analyzer.getIncludes());
 			FileWriter.write(pathToOutput+Paths.get("/")+"excludes.txt", analyzer.getExcludes());
 			FileWriter.write(pathToOutput+Paths.get("/")+"developer-included-tests.txt", analyzer.getTests());
