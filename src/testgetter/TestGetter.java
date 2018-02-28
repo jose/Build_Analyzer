@@ -3,11 +3,13 @@ package testgetter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.tools.ant.RuntimeConfigurable;
 import org.apache.tools.ant.Target;
 import org.apache.tools.ant.Task;
 
+import util.Debugger;
 import util.TaskHelper;
 
 public class TestGetter {
@@ -41,28 +43,32 @@ public class TestGetter {
 					ret = ret+include.getAttributeMap().get("name")+"\n";
 			}
 		}
-//		System.out.println("includes: "+ret);
+		Debugger.log("includes: "+ret);
 		return ret;
 	}
 	
 	public String getExcludesPattern() {
 		String ret = "";
-		
+		List <String> list = new ArrayList<String>();
 		if(this.filesets != null) {
 			for(RuntimeConfigurable fileset:filesets) {
 				if(fileset.getAttributeMap().get("excludes") != null)
-					ret = ret+fileset.getAttributeMap().get("excludes")+"\n";
+					list.add((String) fileset.getAttributeMap().get("excludes"));
 			}
 		}
 		
 		if(this.excludes != null) {
 			for(RuntimeConfigurable exclude:excludes) {
 				String temp = (String) exclude.getAttributeMap().get("name");
-				if(exclude.getAttributeMap().get("name") != null && !temp.contains("$"))
-					ret = ret+exclude.getAttributeMap().get("name")+"\n";
+				if(exclude.getAttributeMap().get("name") != null ) 
+					list.add((String) exclude.getAttributeMap().get("name"));
 			}
 		}
-//		System.out.println("excludes: "+ret);
+		list = list.stream().distinct().collect(Collectors.toList());
+		for(int i=0; i<list.size(); i++) {
+			ret = ret + list.get(i) + '\n';
+		}
+		Debugger.log("excludes: "+ret);
 		return ret;
 	}
 	

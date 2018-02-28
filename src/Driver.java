@@ -16,11 +16,16 @@ public class Driver {
 		String pathToOutput = "";
 		File dir, buildFile;
 		Scanner scanner = new Scanner(System.in);
-		String input[] = new String[2];
-		input = scanner.nextLine().split(" ");
+//		String input[] = new String[2];
+//		input = args[0].split(" ");
+//		input = scanner.nextLine().split(" ");
+//		
+//		pathToProject = input[0];
+//		pathToOutput = input[1];
 		
-		pathToProject = input[0];
-		pathToOutput = input[1];
+		pathToProject = args[0];
+		pathToOutput = args[1];
+		buildFile = new File(args[2]);
 		
 		
 //		System.out.println("Please input a path to the project: ");
@@ -28,26 +33,27 @@ public class Driver {
 //		System.out.println("Please input a path to write the result: ");
 //		pathToOutput = scanner.nextLine();
 		
-		dir = new File(pathToProject);
-		if(!dir.isDirectory()) {
-			System.out.println("Not a directory");
-		} else {
-			String[] includes = {"*build**.xml","*Build**.xml"};
-			String[] excludes = {};
-			String buildFiles[] = WildCardResolver.resolveWildCard(includes, excludes, dir.toString());
-			if(buildFiles.length == 1) {
-				buildFile = new File(dir.getPath() + Paths.get("/") + buildFiles[0]);
-			}
-			else if(buildFiles.length == 0) {
-				System.out.println("No build file found, please manually input your build file name: ");
-				int index = pathToProject.lastIndexOf(Paths.get("/").toString());
-				buildFile = new File(Paths.get(pathToProject.substring(0,index+1)) + Paths.get("/").toString() + scanner.nextLine());
-			}
-			else{
-				System.out.println("More than 1 *build.xml files found, please manually input your build file name:");
-				int index = pathToProject.lastIndexOf(Paths.get("/").toString());
-				buildFile = new File(Paths.get(pathToProject) + Paths.get("/").toString() + scanner.nextLine());
-			}
+//		dir = new File(pathToProject);
+//		if(!dir.isDirectory()) {
+//			System.out.println("Not a directory");
+//		} else {
+//			String[] includes = {"*build**.xml","*Build**.xml"};
+//			String[] excludes = {};
+//			String buildFiles[] = WildCardResolver.resolveWildCard(includes, excludes, dir.toString());
+//			if(buildFiles.length == 1) {
+//				System.out.println("one found");
+//				buildFile = new File(dir.getPath() + Paths.get("/") + buildFiles[0]);
+//			}
+//			else if(buildFiles.length == 0) {
+//				System.out.println("No build file found, please manually input your build file name: ");
+//				int index = pathToProject.lastIndexOf(Paths.get("/").toString());
+//				buildFile = new File(Paths.get(pathToProject.substring(0,index+1)) + Paths.get("/").toString() + scanner.nextLine());
+//			}
+//			else{
+//				System.out.println("More than 1 *build.xml files found, please manually input your build file name:");
+//				int index = pathToProject.lastIndexOf(Paths.get("/").toString());
+//				buildFile = new File(Paths.get(pathToProject) + Paths.get("/").toString() + scanner.nextLine());
+//			}
 //			System.out.println("Build file: "+buildFile);
 			Analyzer analyzer = new Analyzer(buildFile);
 //			System.out.println(analyzer.getJunitTarget());
@@ -55,7 +61,7 @@ public class Driver {
 			FileWriter.write(pathToOutput+Paths.get("/")+"includes.txt", analyzer.getIncludes());
 			FileWriter.write(pathToOutput+Paths.get("/")+"excludes.txt", analyzer.getExcludes());
 			FileWriter.write(pathToOutput+Paths.get("/")+"developer-included-tests.txt", analyzer.getTests());
-		}
+//		}
 		
 	}
 
