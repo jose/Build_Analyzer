@@ -38,7 +38,6 @@ public class Analyzer {
 		
 		//Initialize Path parser
 		pathParser = new PathParser(project);
-//		System.out.println("here: "+pathParser.parse("${basedir}"));
 		
 	}
 	
@@ -61,7 +60,6 @@ public class Analyzer {
 	public String getTests() {
 		String tests = "";
 		String dir = this.project.getBaseDir().toString()+Paths.get("/")+this.pathParser.parse(testGetter.getTestDir());
-//		System.out.println("parsed dir: "+pathParser.parse(dir));
 		
 		String str[] = WildCardResolver.resolveWildCard(this.getIncludes().split("\n"), this.getExcludes().split("\n"), dir);
 		for(int i = 0; i<str.length; i++) {
