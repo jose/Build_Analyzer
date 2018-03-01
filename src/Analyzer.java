@@ -72,5 +72,4 @@ public class Analyzer {
 		return targetGetter.getJunitTarget();
 	}
 	
-	
 }
