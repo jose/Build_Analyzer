@@ -2,8 +2,10 @@ package testgetter;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import org.apache.tools.ant.RuntimeConfigurable;
 import org.apache.tools.ant.Target;
@@ -50,6 +52,7 @@ public class TestGetter {
 	public String getExcludesPattern() {
 		String ret = "";
 		List <String> list = new ArrayList<String>();
+		Set<String> hs = new HashSet<>();
 		if(this.filesets != null) {
 			for(RuntimeConfigurable fileset:filesets) {
 				if(fileset.getAttributeMap().get("excludes") != null)
@@ -64,7 +67,10 @@ public class TestGetter {
 					list.add((String) exclude.getAttributeMap().get("name"));
 			}
 		}
-		list = list.stream().distinct().collect(Collectors.toList());
+//		list = list.stream().distinct().collect(Collectors.toList());
+		hs.addAll(list);
+		list.clear();
+		list.addAll(hs);
 		for(int i=0; i<list.size(); i++) {
 			ret = ret + list.get(i) + '\n';
 		}
