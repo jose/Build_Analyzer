@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="Build_Analyzer" default="jar" basedir=".">
+<project name="Build-Analyzer" default="jar" basedir=".">
 
     <property name="dir.src.classes"    value="src"/>
     <property name="dir.src.tests"      value="test"/>
@@ -56,7 +56,7 @@
     </target>
 
     <target name="jar" depends="test" description="Build jar for this project">
-        <jar destfile="${dir.target}/analyzer.jar" basedir="${dir.target.classes}">
+        <jar destfile="${dir.target}/build-analyzer.jar" basedir="${dir.target.classes}">
           <manifest>
             <attribute name="Main-Class" value="Driver"/>
           </manifest>
