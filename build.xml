@@ -65,7 +65,7 @@
     </target>
 
     <target name="test" depends="compile.tests">
-        <junit fork="yes" showoutput="true">
+        <junit fork="yes" showoutput="true" haltonerror="yes" haltonfailure="yes">
             <classpath refid="test.classpath" />
             <formatter type="xml"/>
             <batchtest todir="${dir.target}">
