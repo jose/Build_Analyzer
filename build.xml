@@ -6,7 +6,6 @@
     <property name="dir.target"         value = "bin"/>
     <property name="dir.target.classes" value = "${dir.target}/classes"/>
     <property name="dir.target.tests"   value = "${dir.target}/tests"/>
-    <property name="dir.jar" value = "../"/>
 
     <!-- Base compile classpath -->
     <path id="compile.classpath">
@@ -57,7 +56,7 @@
     </target>
 
     <target name="jar" depends="compile" description="Build jar for this project">
-        <jar destfile="${dir.jar}/analyzer.jar" basedir="${dir.target.classes}">
+        <jar destfile="${dir.target}/analyzer.jar" basedir="${dir.target.classes}">
           <manifest>
             <attribute name = "Main-Class" value = "Driver"/>
           </manifest>
