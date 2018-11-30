@@ -4,7 +4,7 @@ Ant build file analyzer that extracts compile-targets, developer included/exclud
 
 ## Running the Program
 
-`java -jar build-analyzer.jar [path-to-project-directory] [path-to-place-output-file] [build-file-name]`
+`java -jar build-analyzer-[version].jar [path-to-project-directory] [path-to-place-output-file] [build-file-name]`
 
 ### Program Output
 

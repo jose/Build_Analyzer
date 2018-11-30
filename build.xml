@@ -7,6 +7,9 @@
     <property name="dir.target.classes" value="${dir.target}/classes"/>
     <property name="dir.target.tests"   value="${dir.target}/tests"/>
 
+    <property name="version"  value="0.0.1"/>
+    <property name="dist.jar" value="${dir.target}/build-analyzer-${version}.jar"/>
+
     <!-- Base compile classpath -->
     <path id="compile.classpath">
         <!-- Add libraries if necessary -->
@@ -56,7 +59,7 @@
     </target>
 
     <target name="jar" depends="test" description="Build jar for this project">
-        <jar destfile="${dir.target}/build-analyzer.jar" basedir="${dir.target.classes}">
+        <jar destfile="${dist.jar}" basedir="${dir.target.classes}">
           <manifest>
             <attribute name="Main-Class" value="Driver"/>
           </manifest>
