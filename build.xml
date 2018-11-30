@@ -68,7 +68,7 @@
         <junit fork="yes" showoutput="true">
             <classpath refid="test.classpath" />
             <formatter type="xml"/>
-            <batchtest>
+            <batchtest todir="${dir.target}">
                 <fileset dir="${dir.src.tests}">
                     <include name="Test*.java"/>
                 </fileset>
