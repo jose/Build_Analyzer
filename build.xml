@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="Build_Analyzer" default="jar" basedir=".">
 
-    <property name="dir.src.classes"    value = "src"/>
-    <property name="dir.src.tests"      value = "test"/>
-    <property name="dir.target"         value = "bin"/>
-    <property name="dir.target.classes" value = "${dir.target}/classes"/>
-    <property name="dir.target.tests"   value = "${dir.target}/tests"/>
+    <property name="dir.src.classes"    value="src"/>
+    <property name="dir.src.tests"      value="test"/>
+    <property name="dir.target"         value="bin"/>
+    <property name="dir.target.classes" value="${dir.target}/classes"/>
+    <property name="dir.target.tests"   value="${dir.target}/tests"/>
 
     <!-- Base compile classpath -->
     <path id="compile.classpath">
@@ -55,10 +55,10 @@
         </javac>
     </target>
 
-    <target name="jar" depends="compile" description="Build jar for this project">
+    <target name="jar" depends="test" description="Build jar for this project">
         <jar destfile="${dir.target}/analyzer.jar" basedir="${dir.target.classes}">
           <manifest>
-            <attribute name = "Main-Class" value = "Driver"/>
+            <attribute name="Main-Class" value="Driver"/>
           </manifest>
           <zipgroupfileset dir="lib" includes="*.jar"/>
         </jar>
