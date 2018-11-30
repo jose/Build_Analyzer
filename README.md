@@ -1,4 +1,4 @@
-# Build-Analyzer
+# Build-Analyzer [![Build Status](https://travis-ci.org/jose/build-analyzer.svg?branch=master)](https://travis-ci.org/jose/build-analyzer)
 
 Ant build file analyzer that extracts compile-targets, developer included/excluded test patterns, and a list of developer ran tests.
 
