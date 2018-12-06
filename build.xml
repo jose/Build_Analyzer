@@ -7,7 +7,7 @@
     <property name="dir.target.classes" value="${dir.target}/classes"/>
     <property name="dir.target.tests"   value="${dir.target}/tests"/>
 
-    <property name="version"  value="0.0.1"/>
+    <property name="version"  value="0.0.2-SNAPSHOT"/>
     <property name="dist.jar" value="${dir.target}/build-analyzer-${version}.jar"/>
 
     <!-- Base compile classpath -->
